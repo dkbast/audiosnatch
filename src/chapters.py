@@ -25,8 +25,10 @@ def get_chapters(BOOK_URL):
 	chapters = [{'name': x['name'], 'url': x['chapter_link_dropbox']} for x in json if x['chapter_link_dropbox'] != SKIP_CHAPTER]
 
 	o = urlparse(BOOK_URL)
-	makedirs(path.join('downloads', o.path), exist_ok=True)
-	
+	newPath = 'downloads/' + o.path
+	print(newPath)
+	makedirs(newPath, exist_ok=True)
+
 	for item in chapters:
 		try:
 			download(MEDIA_URL+item['url'], 'downloads/'+o.path+'/'+item['name']+'.mp3')
